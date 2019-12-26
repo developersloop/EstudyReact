@@ -4,6 +4,7 @@ const { validationResult } = require('express-validator');
 const jwtService = require('../services/LoginService');
 const bcrypt = require('bcrypt');
 const storage = require('node-sessionstorage');
+const Contact = mongoose.model('Contact')
 
 module.exports = {
             //
@@ -66,9 +67,14 @@ module.exports = {
             },
             async show(req,res){
                   const id = req.params.id;
-                  const user = await User.findById(id).populate('contatos')
-                   
-                  return res.json(user);
+                  const contatos = await Contact.find({user_id:id});
+                  const user = await User.findById(id);
+                  // console.log(user);
+                  return res.json({
+                           contatos,
+                           user,
+                           
+                  });
             },
 
 }

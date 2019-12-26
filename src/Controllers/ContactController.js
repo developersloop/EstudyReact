@@ -10,6 +10,8 @@ module.exports = {
            async store(req,res){
                  const { nome,phone } = req.body;
 
+            //      console.log(req.body);
+
                  // recuperando id do usuario logado
                  const user_id = storage.getItem('user_id');
 
@@ -17,8 +19,6 @@ module.exports = {
                           nome,
                           phone,
                           user_id,
-
-                          
                  });
                  return res.json(contacts);
            },
